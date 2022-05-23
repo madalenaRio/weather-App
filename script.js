@@ -1,14 +1,28 @@
+
+import { ApiKey } from "./config";
+const form = document.querySelector("form");
+const input = document.querySelector("input");
+const msg = document.getElementById("msg")
+
+let inputVal = input.value;
+
+const key = ApiKey;
+
+form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    console.log(getWeather);
+
+     });
+
 console.log ("is this weather thing working?");
 
-const key = "777ec2ec99c374aacef9a89e0e843292";
-const formSearch = document.querySelector('search-input')
+const getWeather = () => {
+    
+    fetch(`https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=${part}&appid=${key}`)
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(err => console.log(err))
 
-fetch(api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key})
+}
 
-fetch(url)
-    .then(response => response.json())
-    .then(data => {
-      const { main, name, sys, weather } = data;
-      const icon = `https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/${
-        weather[0]["icon"]
-      }.svg`;

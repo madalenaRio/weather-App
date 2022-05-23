@@ -10,22 +10,20 @@
 </head>
 <body>
     
-    <div class="headerMenu" id="headerMenu">
+    <div class="topBanner" id="topBanner">
         <h1> Today's weather</h1>
     </div>
-    <div>
-        <p>Your Location</p>
-        <form class="searchForm" action="/en/search-locations" method="GET">
-			<input name="query" class="search-input" type="text" placeholder="Search">
-		</form>
+    <div class="container">
+        <h2>Your Location</h2>
+        <form class="form" id="form">
+            <input class="input" type="text" placeholder="Search for a city" autofocus>
+            <button class="button" type="submit">SUBMIT</button>
+            <span class="msg" id="msg"></span>
+        </form>
     </div>
-    <div>
 
-        
+    <div class="cityCard" Id="cityCard">
     </div>
-    <div></div>
-    <div></div>
-
 
 </body>
 </html>
