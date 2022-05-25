@@ -17,7 +17,7 @@ const executeForm = () => {
     getCoordinates(cityName);
 }
 
-// -----  trying to implemntent error message when user types same city twice  -----
+// -----  trying to implement error message when user types same city twice  -----
 
 // const executeForm = () => {
 //     // get the value from input text
@@ -40,25 +40,29 @@ const getWeather = (lat, lon) => {
         .then(data => {
 
             const { current, timezone } = data;
+
             const cityCard = document.getElementById("cityCard");
             const icon = document.createElement("img")
+            icon.classList.add("img")
+            icon.src = "http://openweathermap.org/img/wn/" + current.weather[0].icon + "@2x.png"; 
+            const tempParagraph = document.createElement("p");
+            tempParagraph.innerText = Math.round(current.temp) + " ºC";
+            cityCard.append(icon);
+            cityCard.append(tempParagraph);
+
+            const cityList = document.getElementById("cityList")
             const weatherCondParagraph = document.createElement("li");
-            const tempParagraph = document.createElement("li");
             const feelsLikeParagraph = document.createElement("li");
             const countryParagraph = document.createElement("li");
             const cloudsParagraph = document.createElement("li");
-            icon.src = "http://openweathermap.org/img/wn/" + current.weather[0].icon + "@2x.png";
-            weatherCondParagraph.innerText = "Weather condition = " + current.weather[0].description;
-            tempParagraph.innerText = "Temperature = " + Math.round(current.temp) + " ºC";
-            feelsLikeParagraph.innerText = "Feels like = " + Math.round(current.feels_like) + " ºC";
-            countryParagraph.innerText = "Country and State = " + timezone;
-            cloudsParagraph.innerText = "Clouds = " + current.clouds + "%";
-            cityCard.append(icon);
-            cityCard.append(weatherCondParagraph);
-            cityCard.append(tempParagraph);
-            cityCard.append(feelsLikeParagraph);
-            cityCard.append(countryParagraph);
-            cityCard.append(cloudsParagraph);
+            weatherCondParagraph.innerText = "Weather: " + current.weather[0].description;
+            feelsLikeParagraph.innerText = "Feels like: " + Math.round(current.feels_like) + " ºC";
+            countryParagraph.innerText = "Location: " + timezone;
+            cloudsParagraph.innerText = "Clouds: " + current.clouds + "%";
+            cityList.append(weatherCondParagraph);
+            cityList.append(feelsLikeParagraph);
+            cityList.append(countryParagraph);
+            cityList.append(cloudsParagraph);
         })
         .catch(err => console.log(err))
     
