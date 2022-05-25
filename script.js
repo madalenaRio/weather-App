@@ -44,7 +44,7 @@ const getWeather = (lat, lon) => {
             const cityCard = document.getElementById("cityCard");
             const icon = document.createElement("img")
             icon.classList.add("img")
-            icon.src = "http://openweathermap.org/img/wn/" + current.weather[0].icon + "@2x.png"; 
+            icon.src = "https://openweathermap.org/img/wn/" + current.weather[0].icon + "@2x.png"; 
             const tempParagraph = document.createElement("p");
             tempParagraph.innerText = Math.round(current.temp) + " ºC";
             cityCard.append(icon);
@@ -65,11 +65,10 @@ const getWeather = (lat, lon) => {
             cityList.append(cloudsParagraph);
         })
         .catch(err => console.log(err))
-    
 }
 
 const getCoordinates = (cityName) => {
-    fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&appid=${key}`)
+    fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&appid=${key}`)
         .then(response => response.json())
         .then(data => {
             console.log(data)
