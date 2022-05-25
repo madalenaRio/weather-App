@@ -16,35 +16,36 @@ const executeForm = () => {
     // get coordinates from input
     getCoordinates(cityName);
     //getWeather();
-   
-
 }
 
 const getWeather = (lat, lon) => { 
-    const weatherData = fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${key}`)
+    const weatherData = fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=metric&appid=${key}&only_current={true}`)
     .then(response => response.json())
         .then (data => {
            
-            const { main, name, sys, weather } = data
+            const { current, timezone } = data;
             const cityCard = document.getElementById("cityCard");
+            const icon = document.createElement("img")
             const weatherCondParagraph = document.createElement("p");
             const tempParagraph = document.createElement("p");
             const feelsLikeParagraph = document.createElement("p");
             const countryParagraph = document.createElement("p");
-            const cityNameParagraph = document.createElement("p");
-            weatherCondParagraph.innerText = "Weather condition = " + weather.description;
-            tempParagraph.innerText = "Temperature = " + main.temp;
-            feelsLikeParagraph.innerText = "Feels like = " + main.feels_like;
-            countryParagraph.innerText = "Country = " + sys.country;
-            cityNameParagraph.innerText = "City location measurement = " + name;
+            const cloudsParagraph = document.createElement("p")
+            icon.src = "http://openweathermap.org/img/wn/" + current.weather[0].icon + "@2x.png";
+            weatherCondParagraph.innerText = "Weather condition = " + current.weather[0].description;
+            tempParagraph.innerText = "Temperature = " + Math.round(current.temp) + " ºC";
+            feelsLikeParagraph.innerText = "Feels like = " + Math.round(current.feels_like) + " ºC";
+            countryParagraph.innerText = "Country = " + timezone;
+            cloudsParagraph.innerText = "Clouds = " + current.clouds + "%";
+            cityCard.append(icon);
             cityCard.append(weatherCondParagraph);
             cityCard.append(tempParagraph);
             cityCard.append(feelsLikeParagraph);
             cityCard.append(countryParagraph);
-            cityCard.append(cityNameParagraph);
+            cityCard.append(cloudsParagraph);
         })
         .catch(err => console.log(err))
-   
+   console.log(Data);
 }
 
 const getCoordinates = (cityName) => {
