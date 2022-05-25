@@ -69,16 +69,12 @@ button:hover {
 
 .cityCardContainer {
     display: grid;
-    grid-gap:0px 0px;
     grid-template-columns: repeat(2, 1fr);
-    width:50%;
-    padding: 5px;
-    margin:5px
+    margin: 15px
 }
 
 .img {
     width: 150px;
-    grid-column: span;
 }
 
 p { 
@@ -88,9 +84,8 @@ p {
 }
 
 ul {
-    
     list-style: none;
-    padding: 10% 10%;
+    padding: 10%;
     border-radius: 20px;
     background: var(--orange);
     color: white;
@@ -100,7 +95,6 @@ ul {
 }
 
 #msg {
-
     display: flex;
     flex-wrap: wrap;
     padding-top: 20px;
@@ -131,10 +125,12 @@ ul {
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
+        margin-left: 50px;
+        padding: 0%;
     }
     .button {
         width: 80%;
-        margin: 2%;
+        margin: 1%;
         margin-left: 10%;
     }
     .input {
