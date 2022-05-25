@@ -7,7 +7,7 @@ const key = ApiKey;
 
 const button = document.getElementById("button")
 const input = document.getElementById("input");
-const msg = document.getElementById("msg")
+const emptyInputMessage = document.getElementById("msg");
 
 const executeForm = () => {
     // get the value from input text
@@ -15,7 +15,7 @@ const executeForm = () => {
     console.log(cityName)
     // get coordinates from input
     getCoordinates(cityName);
-    //getWeather();
+    
 }
 
 const getWeather = (lat, lon) => { 
@@ -35,7 +35,7 @@ const getWeather = (lat, lon) => {
             weatherCondParagraph.innerText = "Weather condition = " + current.weather[0].description;
             tempParagraph.innerText = "Temperature = " + Math.round(current.temp) + " ºC";
             feelsLikeParagraph.innerText = "Feels like = " + Math.round(current.feels_like) + " ºC";
-            countryParagraph.innerText = "Country = " + timezone;
+            countryParagraph.innerText = "Country and State = " + timezone;
             cloudsParagraph.innerText = "Clouds = " + current.clouds + "%";
             cityCard.append(icon);
             cityCard.append(weatherCondParagraph);
@@ -45,7 +45,7 @@ const getWeather = (lat, lon) => {
             cityCard.append(cloudsParagraph);
         })
         .catch(err => console.log(err))
-   console.log(Data);
+  
 }
 
 const getCoordinates = (cityName) => {
@@ -59,7 +59,9 @@ const getCoordinates = (cityName) => {
             console.log(lat, lon)
             getWeather(lat, lon)
         })
-        .catch(err => console.log(err))
+        .catch(() => {
+            emptyInputMessage.textContent = "Please search for a valid city 😩";
+          });
 }
 
 button.addEventListener("click", executeForm);
