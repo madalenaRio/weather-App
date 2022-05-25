@@ -7,7 +7,7 @@ const key = ApiKey;
 
 const button = document.getElementById("button")
 const input = document.getElementById("input");
-const emptyInputMessage = document.getElementById("msg");
+const errorInputMessage = document.getElementById("msg");
 
 const executeForm = () => {
     // get the value from input text
@@ -15,22 +15,38 @@ const executeForm = () => {
     console.log(cityName)
     // get coordinates from input
     getCoordinates(cityName);
-    
 }
 
-const getWeather = (lat, lon) => { 
+// -----  trying to implemntent error message when user types same city twice  -----
+
+// const executeForm = () => {
+//     // get the value from input text
+//     cityName = input.value;
+//     //compare to existing ones if the same display error message
+//     const CityCardlistItems = list.querySelectorAll(".cityCard .li");
+//     const listItemsArray = Array.from(CityCardlistItems);
+
+//     if (cityName.innerText === listItemsArray[4].innerText) {
+//         errorInputMessage.textContent = "You got the weather for that already please search another city 😩";
+//     } else {
+//         // get coordinates from input
+//         getCoordinates(cityName);
+//     }
+// }
+
+const getWeather = (lat, lon) => {
     const weatherData = fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=metric&appid=${key}&only_current={true}`)
-    .then(response => response.json())
-        .then (data => {
-           
+        .then(response => response.json())
+        .then(data => {
+
             const { current, timezone } = data;
             const cityCard = document.getElementById("cityCard");
             const icon = document.createElement("img")
-            const weatherCondParagraph = document.createElement("p");
-            const tempParagraph = document.createElement("p");
-            const feelsLikeParagraph = document.createElement("p");
-            const countryParagraph = document.createElement("p");
-            const cloudsParagraph = document.createElement("p")
+            const weatherCondParagraph = document.createElement("li");
+            const tempParagraph = document.createElement("li");
+            const feelsLikeParagraph = document.createElement("li");
+            const countryParagraph = document.createElement("li");
+            const cloudsParagraph = document.createElement("li");
             icon.src = "http://openweathermap.org/img/wn/" + current.weather[0].icon + "@2x.png";
             weatherCondParagraph.innerText = "Weather condition = " + current.weather[0].description;
             tempParagraph.innerText = "Temperature = " + Math.round(current.temp) + " ºC";
@@ -45,11 +61,10 @@ const getWeather = (lat, lon) => {
             cityCard.append(cloudsParagraph);
         })
         .catch(err => console.log(err))
-  
+    
 }
 
 const getCoordinates = (cityName) => {
-
     fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&appid=${key}`)
         .then(response => response.json())
         .then(data => {
@@ -60,8 +75,9 @@ const getCoordinates = (cityName) => {
             getWeather(lat, lon)
         })
         .catch(() => {
-            emptyInputMessage.textContent = "Please search for a valid city 😩";
-          });
+            errorInputMessage.textContent = "Please search for a valid city 😩";
+        });
 }
 
 button.addEventListener("click", executeForm);
+
