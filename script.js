@@ -36,59 +36,62 @@ const executeForm = () => {
 
 const getWeather = (lat, lon) => {
 
-    const weatherData = fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=metric&appid=${key}&only_current={true}`)
-        .then(response => response.json())
-        .then(data => {
-
-            const { current, timezone } = data;
-            const cityCardContainer = document.getElementById("cityCardContainer");
-
-            const tempParagraph = document.createElement("p");
-            const icon = document.createElement("img")
-            const weatherCondParagraph = document.createElement("li");
-            const feelsLikeParagraph = document.createElement("li");
-            const countryParagraph = document.createElement("li");
-            const cloudsParagraph = document.createElement("li")
-
-            const cityCard = document.createElement("div")
-
-            cityCard.setAttribute("id", "cityCard")
-            icon.src = "http://openweathermap.org/img/wn/" + current.weather[0].icon + "@2x.png";
-            weatherCondParagraph.innerText = "Weather condition : " + current.weather[0].description;
-            tempParagraph.innerText = Math.round(current.temp) + " ºC";
-            feelsLikeParagraph.innerText = "Feels like : " + Math.round(current.feels_like) + " ºC";
-            countryParagraph.innerText = "Timezone : " + timezone;
-            cloudsParagraph.innerText = "Clouds : " + current.clouds + "%";
-
-            cityCard.append(icon);
-            cityCard.append(tempParagraph);
-            cityCard.append(weatherCondParagraph);
-            cityCard.append(feelsLikeParagraph);
-            cityCard.append(countryParagraph);
-            cityCard.append(cloudsParagraph);
-
-            cityCardContainer.append(cityCard)
-        })
-        // .then(data => console.log(data))
-        .catch(err => console.log(err))
-
     const fiveDaysData = fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=metric&appid=${key}`)
         .then(response => response.json())
-        //.then(data => console.log(data))
+      
         .then(data => {
-            const { current, daily } = data;
+            const { daily } = data;
+            const cityCardContainer = document.getElementById("cityCardContainer");
 
             for (let i = 0; i < daily.length; i++) {
                 const day = daily[i].dt;
 
                 let [dayOfWeek, month, dayOfMonth] = convertTimeToWeekDay(day);
 
+                if (i == 0) {
+                    const tempParagraph = document.createElement("p");
+                    const icon = document.createElement("img")
+                    const weatherCondParagraph = document.createElement("li");
+                    const feelsLikeParagraph = document.createElement("li");
+                    const minTemperature = document.createElement("li");
+                    const maxTemperature = document.createElement("li");
+                    const cloudsParagraph = document.createElement("li");
+
+                    const cityCard = document.createElement("div");
+                    cityCard.setAttribute("id", "cityCard");
+                    
+                    icon.src = "http://openweathermap.org/img/wn/" + daily[i].weather[0].icon + "@2x.png";
+                    tempParagraph.innerText = Math.round(daily[i].temp.day) + " ºC";
+                    weatherCondParagraph.innerText = "Weather condition : " + daily[i].weather[0].description;
+                    feelsLikeParagraph.innerText = "Feels like : " + Math.round(daily[i].feels_like.day) + " ºC";
+                    minTemperature.innerText = "min : " + Math.round(daily[i].temp.min) + " ºC";
+                    maxTemperature.innerText = "max : " + Math.round(daily[i].temp.max) + " ºC";
+                    cloudsParagraph.innerText = "Clouds : " + daily[i].clouds + "%";
+
+                    cityCard.append(icon);
+                    cityCard.append(tempParagraph);
+                    cityCard.append(weatherCondParagraph);
+                    cityCard.append(feelsLikeParagraph);
+                    cityCard.append(minTemperature);
+                    cityCard.append(maxTemperature);
+                    cityCard.append(cloudsParagraph);
+
+                    cityCardContainer.append(cityCard)
+                }
+
+                if (i > 0) {
+
+                }
+
                 console.log(dayOfWeek, dayOfMonth, month);
+                console.log(daily[i].weather[0].icon);
+                console.log(daily[i].temp.min);
+                console.log(daily[i].temp.max);
+                console.log(daily[i].weather[0].description);
             }
 
-            // console.log(daily[0].dt)
-            // console.log(daily.length)
-            // console.log(daily)
+
+
         })
 
         .catch(err => console.log(err))
