@@ -56,7 +56,7 @@ const getWeather = (lat, lon) => {
             weatherCondParagraph.innerText = "Weather condition : " + current.weather[0].description;
             tempParagraph.innerText = Math.round(current.temp) + " ºC";
             feelsLikeParagraph.innerText = "Feels like : " + Math.round(current.feels_like) + " ºC";
-            countryParagraph.innerText = "Country and State : " + timezone;
+            countryParagraph.innerText = "Timezone : " + timezone;
             cloudsParagraph.innerText = "Clouds : " + current.clouds + "%";
 
             cityCard.append(icon);

@@ -11,7 +11,7 @@
     --text_dark: #1e2432;
     --red: #ff1e42;
     --darkpurple: #37035c;
-    --orange: #ff8c00;
+    --orange: #facb4b;
   }
 
 body {
@@ -68,9 +68,10 @@ button:hover {
 /* ---- city cards ----- */
 
 .cityCardContainer {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    margin: 15px
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 15px;
 }
 
 .img {
@@ -78,20 +79,26 @@ button:hover {
 }
 
 p { 
-    color: white;
+    color: rgb(252, 247, 255);
     font-size: 3rem;
-    margin-left: 20px;
+    font-weight: 900;
+    margin-right: 10px;
+    margin-top: 10px;
+    text-shadow: 4px 5px rgba(0,0,0,0.35);
+    float: right;
 }
 
 #cityCard {
     list-style: none;
-    padding: 10%;
     border-radius: 20px;
     background: var(--orange);
     color: white;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     text-align: left;
     box-shadow: 4px 15px rgba(0,0,0,0.35);
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
     margin: 10px;
 }
 
@@ -106,6 +113,7 @@ p {
     font-size: 2rem;
 }
 
+/* ---- media querys ----- */
 
 @media screen and (max-width: 500px) {
     body {
