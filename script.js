@@ -41,28 +41,33 @@ const getWeather = (lat, lon) => {
 
             const { current, timezone } = data;
 
-            const cityCard = document.getElementById("cityCard");
+            const cityCard = document.getElementById("cityCardContainer");
             const icon = document.createElement("img")
             icon.classList.add("img")
             icon.src = "https://openweathermap.org/img/wn/" + current.weather[0].icon + "@2x.png"; 
             const tempParagraph = document.createElement("p");
             tempParagraph.innerText = Math.round(current.temp) + " ºC";
-            cityCard.append(icon);
-            cityCard.append(tempParagraph);
-
-            const cityList = document.getElementById("cityList")
+            // cityCardContainer.append(icon);
+            // cityCardContainer.append(tempParagraph);
+            const weatherList = document.createElement("ul");
             const weatherCondParagraph = document.createElement("li");
             const feelsLikeParagraph = document.createElement("li");
             const countryParagraph = document.createElement("li");
             const cloudsParagraph = document.createElement("li");
+            const weatherContainer = createElement("div");
+            weatherContainer.setAttribute("id","weatherContainer")
             weatherCondParagraph.innerText = "Weather: " + current.weather[0].description;
             feelsLikeParagraph.innerText = "Feels like: " + Math.round(current.feels_like) + " ºC";
             countryParagraph.innerText = "Location: " + timezone;
             cloudsParagraph.innerText = "Clouds: " + current.clouds + "%";
-            cityList.append(weatherCondParagraph);
-            cityList.append(feelsLikeParagraph);
-            cityList.append(countryParagraph);
-            cityList.append(cloudsParagraph);
+            weatherList.append(weatherCondParagraph);
+            weatherList.append(feelsLikeParagraph);
+            weatherList.append(countryParagraph);
+            weatherList.append(cloudsParagraph);
+            weatherContainer.append(icon)
+            weatherContainer.append(tempParagraph)
+            weatherContainer.append(weatherList)
+            cityCard.appendchild(weatherContainer);
         })
         .catch(err => console.log(err))
 }
