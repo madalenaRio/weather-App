@@ -41,7 +41,14 @@ const getWeather = (lat, lon) => {
       
         .then(data => {
             const { daily } = data;
+
             const cityCardContainer = document.getElementById("cityCardContainer");
+            const cityCard = document.createElement("div");
+            cityCard.setAttribute("id", "cityCard");
+            const weeklyforecastCityCard = document.createElement("div");
+            weeklyforecastCityCard.setAttribute("id", "cityCard");
+            let weeklyForecastTable = document.createElement('table')
+            let weeklyForecastTablebody = document.createElement('tbody');
 
             for (let i = 0; i < daily.length; i++) {
                 const day = daily[i].dt;
@@ -57,8 +64,6 @@ const getWeather = (lat, lon) => {
                     const maxTemperature = document.createElement("li");
                     const cloudsParagraph = document.createElement("li");
 
-                    const cityCard = document.createElement("div");
-                    cityCard.setAttribute("id", "cityCard");
                     
                     icon.src = "http://openweathermap.org/img/wn/" + daily[i].weather[0].icon + "@2x.png";
                     tempParagraph.innerText = Math.round(daily[i].temp.day) + " ºC";
@@ -76,18 +81,44 @@ const getWeather = (lat, lon) => {
                     cityCard.append(maxTemperature);
                     cityCard.append(cloudsParagraph);
 
-                    cityCardContainer.append(cityCard)
+                    //cityCardContainer.append(cityCard)
                 }
 
-                if (i > 0) {
+               else { 
+                   
+                let row = document.createElement('tr');
 
+                let dayofWeekForecast = document.createElement('td');
+                dayofWeekForecast.innerText = dayOfWeek + ", " + dayOfMonth + " " + month;
+
+                let dayofweekIcon = document.createElement('td');
+                let icon = document.createElement('img');
+                icon.src = "http://openweathermap.org/img/wn/" + daily[i].weather[0].icon + "@2x.png";
+                dayofweekIcon.appendChild(icon);
+                
+                let maxMinTemp = document.createElement('td');
+                maxMinTemp.innerHTML = "min : " + Math.round(daily[i].temp.min) + " ºC" + "<br>" + "max : " + Math.round(daily[i].temp.max) + " ºC";
+
+                let weatherDescription = document.createElement('td');
+                weatherDescription.innerText = daily[i].weather[0].description;
+
+                row.appendChild(dayofWeekForecast);
+                row.appendChild(dayofweekIcon);
+                row.appendChild(maxMinTemp);
+                row.appendChild(weatherDescription);
+                weeklyForecastTablebody.appendChild(row);
+                
                 }
 
-                console.log(dayOfWeek, dayOfMonth, month);
-                console.log(daily[i].weather[0].icon);
-                console.log(daily[i].temp.min);
-                console.log(daily[i].temp.max);
-                console.log(daily[i].weather[0].description);
+                weeklyForecastTable.appendChild(weeklyForecastTablebody);
+                cityCard.appendChild(weeklyForecastTable);
+                cityCardContainer.append(cityCard);
+                
+                // console.log(dayOfWeek, dayOfMonth, month);
+                // console.log(daily[i].weather[0].icon);
+                // console.log(daily[i].temp.min);
+                // console.log(daily[i].temp.max);
+                // console.log(daily[i].weather[0].description);
             }
 
 
