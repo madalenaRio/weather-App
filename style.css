@@ -83,7 +83,7 @@ p {
     margin-left: 20px;
 }
 
-ul {
+#cityCard {
     list-style: none;
     padding: 10%;
     border-radius: 20px;
@@ -92,6 +92,7 @@ ul {
     font-size: 1.5rem;
     text-align: left;
     box-shadow: 4px 15px rgba(0,0,0,0.35);
+    margin: 10px;
 }
 
 #msg {

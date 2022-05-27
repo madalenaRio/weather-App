@@ -34,44 +34,43 @@ const executeForm = () => {
 //     }
 // }
 
-const getWeather = (lat, lon) => {
+const getWeather = (lat, lon) => { 
     const weatherData = fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=metric&appid=${key}&only_current={true}`)
-        .then(response => response.json())
-        .then(data => {
-
+    .then(response => response.json())
+        .then (data => {
+           
             const { current, timezone } = data;
+            const cityCardContainer = document.getElementById("cityCardContainer");
+            // cityCard.style.visibility = "visible"
 
-            const cityCard = document.getElementById("cityCardContainer");
-            const icon = document.createElement("img")
-            icon.classList.add("img")
-            icon.src = "https://openweathermap.org/img/wn/" + current.weather[0].icon + "@2x.png"; 
             const tempParagraph = document.createElement("p");
-            tempParagraph.innerText = Math.round(current.temp) + " ºC";
-            // cityCardContainer.append(icon);
-            // cityCardContainer.append(tempParagraph);
-            const weatherList = document.createElement("ul");
+            const icon = document.createElement("img")
             const weatherCondParagraph = document.createElement("li");
             const feelsLikeParagraph = document.createElement("li");
             const countryParagraph = document.createElement("li");
-            const cloudsParagraph = document.createElement("li");
-            const weatherContainer = createElement("div");
-            weatherContainer.setAttribute("id","weatherContainer")
-            weatherCondParagraph.innerText = "Weather: " + current.weather[0].description;
-            feelsLikeParagraph.innerText = "Feels like: " + Math.round(current.feels_like) + " ºC";
-            countryParagraph.innerText = "Location: " + timezone;
-            cloudsParagraph.innerText = "Clouds: " + current.clouds + "%";
-            weatherList.append(weatherCondParagraph);
-            weatherList.append(feelsLikeParagraph);
-            weatherList.append(countryParagraph);
-            weatherList.append(cloudsParagraph);
-            weatherContainer.append(icon)
-            weatherContainer.append(tempParagraph)
-            weatherContainer.append(weatherList)
-            cityCard.appendchild(weatherContainer);
+            const cloudsParagraph = document.createElement("li")
+            const cityCard = document.createElement("div")
+
+            cityCard.setAttribute("id","cityCard")
+            icon.src = "http://openweathermap.org/img/wn/" + current.weather[0].icon + "@2x.png";
+            weatherCondParagraph.innerText = "Weather condition : " + current.weather[0].description;
+            tempParagraph.innerText = Math.round(current.temp) + " ºC";
+            feelsLikeParagraph.innerText = "Feels like : " + Math.round(current.feels_like) + " ºC";
+            countryParagraph.innerText = "Country and State : " + timezone;
+            cloudsParagraph.innerText = "Clouds : " + current.clouds + "%";
+
+            cityCard.append(icon);
+            cityCard.append(tempParagraph);
+            cityCard.append(weatherCondParagraph);
+            cityCard.append(feelsLikeParagraph);
+            cityCard.append(countryParagraph);
+            cityCard.append(cloudsParagraph);
+
+            cityCardContainer.append(cityCard)
         })
         .catch(err => console.log(err))
+  
 }
-
 const getCoordinates = (cityName) => {
     fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&appid=${key}`)
         .then(response => response.json())
