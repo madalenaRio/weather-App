@@ -48,6 +48,7 @@ const getWeather = (lat, lon) => {
             const weeklyforecastCityCard = document.createElement("div");
             weeklyforecastCityCard.setAttribute("id", "cityCard");
             let weeklyForecastTable = document.createElement('table')
+            weeklyForecastTable.setAttribute("id", "weeklyForecastTable");
             let weeklyForecastTablebody = document.createElement('tbody');
 
             for (let i = 0; i < daily.length; i++) {
@@ -57,6 +58,8 @@ const getWeather = (lat, lon) => {
 
                 if (i == 0) {
                     const tempParagraph = document.createElement("p");
+                    const firstDayOfWeek = document.createElement("p");
+                    firstDayOfWeek.setAttribute("id", "firstDayofWeek");
                     const icon = document.createElement("img")
                     const weatherCondParagraph = document.createElement("li");
                     const feelsLikeParagraph = document.createElement("li");
@@ -66,8 +69,9 @@ const getWeather = (lat, lon) => {
 
                     
                     icon.src = "http://openweathermap.org/img/wn/" + daily[i].weather[0].icon + "@2x.png";
-                    tempParagraph.innerText = Math.round(daily[i].temp.day) + " ºC";
-                    weatherCondParagraph.innerText = "Weather condition : " + daily[i].weather[0].description;
+                    tempParagraph.innerHTML = Math.round(daily[i].temp.day) + " ºC";
+                    firstDayOfWeek.innerHTML = dayOfWeek + ", " + dayOfMonth + " " + month;
+                    weatherCondParagraph.innerText = daily[i].weather[0].description;
                     feelsLikeParagraph.innerText = "Feels like : " + Math.round(daily[i].feels_like.day) + " ºC";
                     minTemperature.innerText = "min : " + Math.round(daily[i].temp.min) + " ºC";
                     maxTemperature.innerText = "max : " + Math.round(daily[i].temp.max) + " ºC";
@@ -75,6 +79,7 @@ const getWeather = (lat, lon) => {
 
                     cityCard.append(icon);
                     cityCard.append(tempParagraph);
+                    cityCard.append(firstDayOfWeek)
                     cityCard.append(weatherCondParagraph);
                     cityCard.append(feelsLikeParagraph);
                     cityCard.append(minTemperature);
@@ -89,7 +94,7 @@ const getWeather = (lat, lon) => {
                 let row = document.createElement('tr');
 
                 let dayofWeekForecast = document.createElement('td');
-                dayofWeekForecast.innerText = dayOfWeek + ", " + dayOfMonth + " " + month;
+                dayofWeekForecast.innerHTML = dayOfWeek + ", " + dayOfMonth + " " + month + "<br>" + daily[i].weather[0].description;
 
                 let dayofweekIcon = document.createElement('td');
                 let icon = document.createElement('img');
@@ -99,15 +104,10 @@ const getWeather = (lat, lon) => {
                 let maxMinTemp = document.createElement('td');
                 maxMinTemp.innerHTML = "min : " + Math.round(daily[i].temp.min) + " ºC" + "<br>" + "max : " + Math.round(daily[i].temp.max) + " ºC";
 
-                let weatherDescription = document.createElement('td');
-                weatherDescription.innerText = daily[i].weather[0].description;
-
                 row.appendChild(dayofWeekForecast);
                 row.appendChild(dayofweekIcon);
                 row.appendChild(maxMinTemp);
-                row.appendChild(weatherDescription);
                 weeklyForecastTablebody.appendChild(row);
-                
                 }
 
                 weeklyForecastTable.appendChild(weeklyForecastTablebody);
