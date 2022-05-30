@@ -46,32 +46,26 @@ const getWeather = (lat, lon) => {
                     const firstDayOfWeek = document.createElement("p");
                     firstDayOfWeek.setAttribute("id", "firstDayofWeek");
                     const icon = document.createElement("img")
+                    const minMaxTemperature = document.createElement("p");
+                    minMaxTemperature.setAttribute("id", "minMaxFirstDayParg");
                     const weatherCondParagraph = document.createElement("li");
                     const feelsLikeParagraph = document.createElement("li");
-                    const minTemperature = document.createElement("li");
-                    const maxTemperature = document.createElement("li");
                     const cloudsParagraph = document.createElement("li");
-
-                    
                     icon.src = "http://openweathermap.org/img/wn/" + daily[i].weather[0].icon + "@2x.png";
                     tempParagraph.innerHTML = Math.round(daily[i].temp.day) + " ºC";
-                    firstDayOfWeek.innerHTML = dayOfWeek + ", " + dayOfMonth + " " + month;
-                    weatherCondParagraph.innerText = daily[i].weather[0].description;
-                    feelsLikeParagraph.innerText = "Feels like : " + Math.round(daily[i].feels_like.day) + " ºC";
-                    minTemperature.innerText = "min : " + Math.round(daily[i].temp.min) + " ºC";
-                    maxTemperature.innerText = "max : " + Math.round(daily[i].temp.max) + " ºC";
+                    firstDayOfWeek.innerHTML = cityName + "<br>" + dayOfWeek + "<br>" + dayOfMonth + month;
+                    weatherCondParagraph.innerHTML = daily[i].weather[0].description;
+                    feelsLikeParagraph.innerHTML = "Feels like : " + Math.round(daily[i].feels_like.day) + " ºC";
+                    minMaxTemperature.innerHTML = "min : " + Math.round(daily[i].temp.min) + " ºC" + "<br>" +"max : " + Math.round(daily[i].temp.max) + " ºC";
                     cloudsParagraph.innerText = "Clouds : " + daily[i].clouds + "%";
 
                     cityCard.append(icon);
                     cityCard.append(tempParagraph);
+                    cityCard.append(minMaxTemperature);
                     cityCard.append(firstDayOfWeek)
                     cityCard.append(weatherCondParagraph);
                     cityCard.append(feelsLikeParagraph);
-                    cityCard.append(minTemperature);
-                    cityCard.append(maxTemperature);
                     cityCard.append(cloudsParagraph);
-
-                    //cityCardContainer.append(cityCard)
                 }
 
                else { 
