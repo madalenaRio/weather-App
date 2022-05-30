@@ -15,24 +15,9 @@ const executeForm = () => {
     console.log(cityName)
     // get coordinates from input
     getCoordinates(cityName);
+   
 }
 
-// -----  trying to implement error message when user types same city twice  -----
-
-// const executeForm = () => {
-//     // get the value from input text
-//     cityName = input.value;
-//     //compare to existing ones if the same display error message
-//     const CityCardlistItems = list.querySelectorAll(".cityCard .li");
-//     const listItemsArray = Array.from(CityCardlistItems);
-
-//     if (cityName.innerText === listItemsArray[4].innerText) {
-//         errorInputMessage.textContent = "You got the weather for that already please search another city 😩";
-//     } else {
-//         // get coordinates from input
-//         getCoordinates(cityName);
-//     }
-// }
 
 const getWeather = (lat, lon) => {
 
@@ -94,7 +79,7 @@ const getWeather = (lat, lon) => {
                 let row = document.createElement('tr');
 
                 let dayofWeekForecast = document.createElement('td');
-                dayofWeekForecast.innerHTML = dayOfWeek + ", " + dayOfMonth + " " + month + "<br>" + daily[i].weather[0].description;
+                dayofWeekForecast.innerHTML = Math.round(daily[i].temp.day) + " ºC" + "<br>" + dayOfWeek + ", " + dayOfMonth + " " + month + "<br>" + daily[i].weather[0].description;
 
                 let dayofweekIcon = document.createElement('td');
                 let icon = document.createElement('img');
@@ -121,7 +106,7 @@ const getWeather = (lat, lon) => {
                 // console.log(daily[i].weather[0].description);
             }
 
-
+           
 
         })
 
@@ -142,6 +127,7 @@ const getCoordinates = (cityName) => {
         .catch(() => {
             errorInputMessage.textContent = "Please search for a valid city 😩";
         });
+        
 }
 
 const convertTimeToWeekDay = (timestamp) => {
