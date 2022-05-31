@@ -1,5 +1,5 @@
 import Data from "./config.js";
-import { createElement, createElementImg } from "./_functions.js";
+import { createAddElement, } from "./_functions.js";
 
 const searchBar = document.querySelector('#searchBar');
 const container = document.querySelector(".container");
@@ -56,11 +56,12 @@ searchBar.addEventListener('keyup', (event) => {
                             const card = document.createElement('div');
                             card.classList.add("card");
                             container.appendChild(card);
-                            //createElementImg(container, "div", "card");
+                            //createAddElement(container, "div", "card");
 
                             const imageBox = document.createElement('div');
                             imageBox.classList.add("imgBx");
                             card.appendChild(imageBox);
+                            //createAddElement(card, "div", "imgBx", "imgBx");
 
                             const cardImg = document.createElement('img');
                             cardImg.src = "http://openweathermap.org/img/wn/" + data.weather[0].icon + "@2x.png";
@@ -69,37 +70,40 @@ searchBar.addEventListener('keyup', (event) => {
                             const contentBox = document.createElement("div");
                             contentBox.classList.add("contentBx");
                             card.appendChild(contentBox);
+                            //createAddElement(card, "div", "contentBx", "");
 
-                            // const cardHeader = document.createElement("h2");
-                            // cardHeader.innerHTML = dayOfTheWeek;
-                            // contentBox.appendChild(cardHeader);
-                            createElement(contentBox, "h2", "h2", dayOfTheWeek);
+                            const cardHeader = document.createElement("h2");
+                            cardHeader.innerHTML = dayOfTheWeek;
+                            contentBox.appendChild(cardHeader);
+                            //createAddElement(contentBox, "h2", "h2", dayOfTheWeek);
 
                             const tempDescription = document.createElement("h4");
                             tempDescription.innerHTML = data.weather[0].description;
                             contentBox.appendChild(tempDescription);
+                            //createAddElement(contentBox, "h4", "h4", data.weather[0].description)
 
                             const currentTempBox = document.createElement("div");
                             currentTempBox.classList.add("color");
                             contentBox.appendChild(currentTempBox);
+                            //createAddElement(contentBox, "div", "color", "");
 
                             // const currentTempHeader = document.createElement("h3");
                             // currentTempHeader.innerHTML = "Temp:"
                             // currentTempBox.appendChild(currentTempHeader);
-                            createElement(currentTempBox, "h3", "h3", "Temp:");
+                            //const currentTempHeader = currentTempHeader;
+                            createAddElement("h3", "currentTempHeader", "Temp:", currentTempBox);
 
-                            // const currentTemp = document.createElement("span");
-                            // currentTemp.classList.add("current-temp");
-                            // currentTemp.innerHTML = data.temp.day + "°C";
-                            // currentTempBox.appendChild(currentTemp);
-                            createElement(currentTempBox, "span", "current-temp", data.temp.day + "°C");
+                            const currentTemp = document.createElement("span");
+                            currentTemp.classList.add("current-temp");
+                            currentTemp.innerHTML = data.temp.day + "°C";
+                            currentTempBox.appendChild(currentTemp);
+                           //createAddElement( "span", "current-temp", data.temp.day + "°C", );
 
-                            // const minMaxTemperatures = document.createElement("div");
-                            // minMaxTemperatures.classList.add("details");
-                            // contentBox.appendChild(minMaxTemperatures);
-                            createElementImg(contentBox, "div", "details")
-
-                           
+                            const minMaxTemperatures = document.createElement("div");
+                            minMaxTemperatures.classList.add("details");
+                            contentBox.appendChild(minMaxTemperatures);
+                            //createElementImg(contentBox, "div", "details")
+                            
                             const minMaxTempHeader = document.createElement("h3");
                             minMaxTempHeader.innerHTML = "More:"
                             minMaxTemperatures.appendChild(minMaxTempHeader);
