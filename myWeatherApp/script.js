@@ -100,8 +100,6 @@ const getWeather = (lat, lon) => {
                 // console.log(daily[i].weather[0].description);
             }
 
-           
-
         })
 
         .catch(err => console.log(err))

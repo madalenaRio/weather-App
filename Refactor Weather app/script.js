@@ -2,8 +2,17 @@ import Data from "./config.js";
 const searchBar = document.querySelector('#searchBar');
 const container = document.querySelector(".container");
 const cityNameContainer = document.querySelector('.city-name');
+const thisCityB = searchBar.value
+console.log(thisCityB + "lets see if it works")
 
 const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+const createHeader = (box, header, headerText) => {
+
+    const currentTempHeader = document.createElement(header);
+    currentTempHeader.innerHTML = headerText;
+    box.appendChild(currentTempHeader);
+}
 
 // Event will start on a keyup action
 searchBar.addEventListener('keyup', (event) => {
@@ -41,6 +50,7 @@ searchBar.addEventListener('keyup', (event) => {
                             const date = new Date();
                             let dayOfTheWeek = weekdays[(date.getDay() + i) % 7];
                             const data = result.daily[i];
+                            console.log(date + "what is this?")
 
                             // Create the elements with Data
                             const card = document.createElement('div');
@@ -59,21 +69,25 @@ searchBar.addEventListener('keyup', (event) => {
                             contentBox.classList.add("contentBx");
                             card.appendChild(contentBox);
 
-                            const cardHeader = document.createElement("h2");
-                            cardHeader.innerHTML = dayOfTheWeek;
-                            contentBox.appendChild(cardHeader);
+                            // const cardHeader = document.createElement("h2");
+                            // cardHeader.innerHTML = dayOfTheWeek;
+                            // contentBox.appendChild(cardHeader);
+                            createHeader(contentBox, "h2", dayOfTheWeek);
 
                             const tempDescription = document.createElement("h4");
                             tempDescription.innerHTML = data.weather[0].description;
+                            
                             contentBox.appendChild(tempDescription);
 
                             const currentTempBox = document.createElement("div");
                             currentTempBox.classList.add("color");
                             contentBox.appendChild(currentTempBox);
 
-                            const currentTempHeader = document.createElement("h3");
-                            currentTempHeader.innerHTML = "Temp:"
-                            currentTempBox.appendChild(currentTempHeader);
+                            // const currentTempHeader = document.createElement("h3");
+                            // currentTempHeader.innerHTML = "Temp:"
+                            // currentTempBox.appendChild(currentTempHeader);
+                            createHeader(currentTempBox, "h3", "Temp:");
+
 
                             const currentTemp = document.createElement("span");
                             currentTemp.classList.add("current-temp");
@@ -110,3 +124,4 @@ searchBar.addEventListener('keyup', (event) => {
             });
     };
 });
+
