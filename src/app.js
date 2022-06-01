@@ -1,5 +1,6 @@
 import Data from "./config.js";
-import { AddElementInnerHtml, AddElementDiv, AddElementSpan } from "./_functions.js";
+import { AddElementInnerHtml, AddElementDiv, AddElementSpan } from "./component.js";
+import './style.css';
 
 const searchBar = document.querySelector('#searchBar');
 const container = document.querySelector(".container");
