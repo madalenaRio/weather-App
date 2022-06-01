@@ -1,33 +1,30 @@
 
-const createAddElement = (elementType, className, text, parentElement) => {
-    constX = document.createElement(elementType);
-    constX.classList.add(className);
-    constX.innerHTML = text;
-    parentElement.appendChild(constX); 
+const AddElementInnerHtml = (parentElement, element, text) => {
+    const childElement = document.createElement(element);
+    childElement.innerHTML = text;
+    parentElement.appendChild(childElement);
 }
 
-// const createAddElement = (elementType, className, text, parentElement) => {
-//     className = document.createElement(elementType);
-//     className.classList.add(className);
-//     className.innerHTML = text;
-//     parentElement.appendChild(className);
-// }
+const AddElementDiv = (parentElement, element, className) => {
+    const tempX = document.createElement(element);
+    tempX.classList.add(className);
+    parentElement.appendChild(tempX);
 
-
-
-const createElementData = (constX, elementType, className, dataIcon) => {
-    constX = document.createElement(elementType);
-    constX.classList.add(className);
-    constX.src = "http://openweathermap.org/img/wn/" + dataIcon + "@2x.png";;
-    appendto.appendChild(constX); 
-
+    return tempX
 }
 
+const AddElementSpan = (parentElement, element, className, text) => {
+    const tempX = document.createElement(element);
+    tempX.classList.add(className);
+    tempX.innerHTML = text;
+    parentElement.appendChild(tempX);
+}
 
 
 export {
 
-    createAddElement,
-    createElementData,
-
+    AddElementInnerHtml,
+    AddElementDiv,
+    AddElementSpan
 }
+
