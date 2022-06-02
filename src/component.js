@@ -1,11 +1,11 @@
 
-const AddElementInnerHtml = (parentElement, element, text) => {
+const addElementInnerHtml = (parentElement, element, text) => {
     const childElement = document.createElement(element);
     childElement.innerHTML = text;
     parentElement.appendChild(childElement);
 }
 
-const AddElementDiv = (parentElement, element, className) => {
+const addElementDiv = (parentElement, element, className) => {
     const tempX = document.createElement(element);
     tempX.classList.add(className);
     parentElement.appendChild(tempX);
@@ -13,7 +13,7 @@ const AddElementDiv = (parentElement, element, className) => {
     return tempX
 }
 
-const AddElementSpan = (parentElement, element, className, text) => {
+const addElementSpan = (parentElement, element, className, text) => {
     const tempX = document.createElement(element);
     tempX.classList.add(className);
     tempX.innerHTML = text;
@@ -23,8 +23,8 @@ const AddElementSpan = (parentElement, element, className, text) => {
 
 export {
 
-    AddElementInnerHtml,
-    AddElementDiv,
-    AddElementSpan
+    addElementInnerHtml,
+    addElementDiv,
+    addElementSpan
 }
 

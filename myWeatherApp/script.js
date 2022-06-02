@@ -21,7 +21,7 @@ const executeForm = () => {
 
 const getWeather = (lat, lon) => {
 
-    const fiveDaysData = fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=metric&appid=${key}`)
+     fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=metric&appid=${key}`)
         .then(response => response.json())
       
         .then(data => {
@@ -32,14 +32,14 @@ const getWeather = (lat, lon) => {
             cityCard.setAttribute("id", "cityCard");
             const weeklyforecastCityCard = document.createElement("div");
             weeklyforecastCityCard.setAttribute("id", "cityCard");
-            let weeklyForecastTable = document.createElement('table')
+            const weeklyForecastTable = document.createElement('table')
             weeklyForecastTable.setAttribute("id", "weeklyForecastTable");
-            let weeklyForecastTablebody = document.createElement('tbody');
+            const weeklyForecastTablebody = document.createElement('tbody');
 
             for (let i = 0; i < daily.length; i++) {
                 const day = daily[i].dt;
 
-                let [dayOfWeek, month, dayOfMonth] = convertTimeToWeekDay(day);
+                const [dayOfWeek, month, dayOfMonth] = convertTimeToWeekDay(day);
 
                 if (i == 0) {
                     const tempParagraph = document.createElement("p");
@@ -70,17 +70,17 @@ const getWeather = (lat, lon) => {
 
                else { 
                    
-                let row = document.createElement('tr');
+                const row = document.createElement('tr');
 
-                let dayofWeekForecast = document.createElement('td');
+                const dayofWeekForecast = document.createElement('td');
                 dayofWeekForecast.innerHTML = Math.round(daily[i].temp.day) + " ºC" + "<br>" + dayOfWeek + ", " + dayOfMonth + " " + month + "<br>" + daily[i].weather[0].description;
 
-                let dayofweekIcon = document.createElement('td');
-                let icon = document.createElement('img');
+                const dayofweekIcon = document.createElement('td');
+                const icon = document.createElement('img');
                 icon.src = "http://openweathermap.org/img/wn/" + daily[i].weather[0].icon + "@2x.png";
                 dayofweekIcon.appendChild(icon);
                 
-                let maxMinTemp = document.createElement('td');
+                const maxMinTemp = document.createElement('td');
                 maxMinTemp.innerHTML = "min : " + Math.round(daily[i].temp.min) + " ºC" + "<br>" + "max : " + Math.round(daily[i].temp.max) + " ºC";
 
                 row.appendChild(dayofWeekForecast);
@@ -93,11 +93,11 @@ const getWeather = (lat, lon) => {
                 cityCard.appendChild(weeklyForecastTable);
                 cityCardContainer.append(cityCard);
                 
-                // console.log(dayOfWeek, dayOfMonth, month);
-                // console.log(daily[i].weather[0].icon);
-                // console.log(daily[i].temp.min);
-                // console.log(daily[i].temp.max);
-                // console.log(daily[i].weather[0].description);
+                 console.log(dayOfWeek, dayOfMonth, month);
+                 console.log(daily[i].weather[0].icon);
+                 console.log(daily[i].temp.min);
+                 console.log(daily[i].temp.max);
+                 console.log(daily[i].weather[0].description);
             }
 
         })
@@ -110,7 +110,9 @@ const getCoordinates = (cityName) => {
     fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&appid=${key}`)
         .then(response => response.json())
         .then(data => {
-            //console.log(data)
+
+            // console.log(data)
+
             lat = data[0].lat;
             lon = data[0].lon;
             console.log(lat, lon)
@@ -124,12 +126,12 @@ const getCoordinates = (cityName) => {
 
 const convertTimeToWeekDay = (timestamp) => {
 
-    let a = new Date(timestamp * 1000);
+    const a = new Date(timestamp * 1000);
     const months = ["January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December"];
     const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-    let dayOfWeek = days[a.getDay()];
-    let month = months[a.getMonth()];
-    let dayOfMonth = a.getDate();
+    const dayOfWeek = days[a.getDay()];
+    const month = months[a.getMonth()];
+    const dayOfMonth = a.getDate();
     // console.log(month);
     // console.log(dayOfMonth);
 

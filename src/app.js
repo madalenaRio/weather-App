@@ -1,5 +1,5 @@
 import Data from "./config.js";
-import { AddElementInnerHtml, AddElementDiv, AddElementSpan } from "./component.js";
+import { addElementInnerHtml, addElementDiv, addElementSpan } from "./component.js";
 import './style.css';
 
 const searchBar = document.querySelector('#searchBar');
@@ -48,29 +48,29 @@ searchBar.addEventListener('keyup', (event) => {
                             
                             // Use the remainder operator (%) to switch from saturday (last in array) back to sunday (first in array)
                             const date = new Date();
-                            let dayOfTheWeek = weekdays[(date.getDay() + i) % 7];
+                            const dayOfTheWeek = weekdays[(date.getDay() + i) % 7];
                             const data = result.daily[i];
                             console.log((date.getDay() + i) % 7);
 
-                            const card = AddElementDiv(container, "div", "card");
-                            const imageBox = AddElementDiv(card, "div", "imgBx");
+                            const card = addElementDiv(container, "div", "card");
+                            const imageBox = addElementDiv(card, "div", "imgBx");
 
                             const cardImg = document.createElement('img');
                             cardImg.src = "http://openweathermap.org/img/wn/" + data.weather[0].icon + "@2x.png";
                             imageBox.appendChild(cardImg);
 
-                            const contentBox = AddElementDiv(card, "div", "contentBx");
-                            AddElementInnerHtml(contentBox, "h2", dayOfTheWeek);
-                            AddElementInnerHtml(contentBox, "h4", data.weather[0].description);
+                            const contentBox = addElementDiv(card, "div", "contentBx");
+                            addElementInnerHtml(contentBox, "h2", dayOfTheWeek);
+                            addElementInnerHtml(contentBox, "h4", data.weather[0].description);
 
-                            const currentTempBox = AddElementDiv(contentBox, "div", "color");
-                            AddElementInnerHtml(currentTempBox,"h3", "Temp:");
-                            AddElementSpan( currentTempBox, "span", "current-temp", data.temp.day + "°C");
+                            const currentTempBox = addElementDiv(contentBox, "div", "color");
+                            addElementInnerHtml(currentTempBox,"h3", "Temp:");
+                            addElementSpan( currentTempBox, "span", "current-temp", data.temp.day + "°C");
 
-                            const minMaxTemperatures = AddElementDiv(contentBox, "div", "details");
-                            AddElementInnerHtml(minMaxTemperatures,"h3", "More:");
-                            AddElementSpan(minMaxTemperatures, "span", "min-temp",data.temp.min + "°C");
-                            AddElementSpan(minMaxTemperatures, "span", "max-temp",data.temp.max + "°C");
+                            const minMaxTemperatures = addElementDiv(contentBox, "div", "details");
+                            addElementInnerHtml(minMaxTemperatures,"h3", "More:");
+                            addElementSpan(minMaxTemperatures, "span", "min-temp",data.temp.min + "°C");
+                            addElementSpan(minMaxTemperatures, "span", "max-temp",data.temp.max + "°C");
                         };
                     });
             })
