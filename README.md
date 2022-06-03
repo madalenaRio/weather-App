@@ -32,5 +32,5 @@ points to learn:
 https://todaysweatherbymadalenario.netlify.app/
 
 # link to refactor js code exercise:
-
+https://refactorexercise.netlify.app/
 
